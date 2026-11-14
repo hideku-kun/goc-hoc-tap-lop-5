@@ -651,6 +651,160 @@
         }
         .btn-nav:active { background: var(--primary-soft); }
 
+        /* Bảng Vàng hợp nhất 3 môn & Đổi Thưởng */
+        .reward-panel {
+            background: var(--surface);
+            border: 1.5px solid var(--border);
+            border-radius: 22px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow);
+        }
+        .reward-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        .tick-counter-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #ECFDF5;
+            border: 2px solid #6EE7B7;
+            color: #065F46;
+            padding: 8px 16px;
+            border-radius: 999px;
+            font-size: 17px;
+            font-weight: 900;
+        }
+        .reward-shop-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        .reward-item-card {
+            border: 1.5px solid var(--border);
+            border-radius: 16px;
+            padding: 14px 16px;
+            background: #F8FAFC;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .reward-item-card.ready {
+            background: #FFFBEB;
+            border-color: #FCD34D;
+        }
+        .reward-item-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .reward-emoji {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            background: white;
+            border: 1px solid var(--border);
+            display: grid;
+            place-items: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        .reward-name {
+            font-weight: 800;
+            font-size: 16px;
+            color: var(--text-main);
+        }
+        .reward-cost {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-sub);
+        }
+        .btn-redeem {
+            padding: 9px 14px;
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(135deg, #F59E0B, #D97706);
+            color: white;
+            font-weight: 800;
+            font-size: 13px;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: 0 4px 10px rgba(217, 119, 6, 0.25);
+        }
+        .btn-redeem:disabled {
+            background: #E2E8F0;
+            color: #94A3B8;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+        .redeem-history-box {
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px dashed var(--border);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+        .redeem-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 10px 5px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            background: #FEF3C7;
+            color: #92400E;
+            border: 1px solid #FDE68A;
+        }
+        .btn-del-chip {
+            background: rgba(146, 64, 14, 0.12);
+            border: none;
+            color: #92400E;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            line-height: 1;
+            cursor: pointer;
+            display: inline-grid;
+            place-items: center;
+            padding: 0;
+        }
+        .btn-del-chip:hover {
+            background: #EF4444;
+            color: white;
+        }
+
+        .unified-summary-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 12px 16px;
+            margin-bottom: 14px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-sub);
+        }
+        .unified-counts {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
         .trophy-grid { display: grid; gap: 14px; }
         .trophy-card {
             background: var(--surface);
@@ -659,6 +813,10 @@
             padding: 18px 20px;
             box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);
         }
+        .trophy-card.has-tick {
+            border-color: #A7F3D0;
+            background: linear-gradient(to right, #FFFFFF, #F0FDF4);
+        }
         .trophy-top {
             display: flex;
             justify-content: space-between;
@@ -666,7 +824,33 @@
             gap: 10px;
             flex-wrap: wrap;
         }
-        .trophy-title { font-size: 17px; font-weight: 800; margin: 0; }
+        .trophy-badges {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .sub-pill {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 800;
+        }
+        .sub-pill-tiengviet { background: #FFF7ED; color: #EA580C; border: 1px solid #FED7AA; }
+        .sub-pill-toan { background: #E0F2FE; color: #0284C7; border: 1px solid #BAE6FD; }
+        .sub-pill-tienganh { background: #CCFBF1; color: #0D9488; border: 1px solid #99F6E4; }
+
+        .trophy-title { font-size: 17px; font-weight: 800; margin: 6px 0 0; }
+        .trophy-tick-badge {
+            background: #ECFDF5;
+            color: #059669;
+            border: 1.5px solid #6EE7B7;
+            padding: 5px 12px;
+            border-radius: 999px;
+            font-weight: 800;
+            font-size: 13px;
+        }
         .trophy-score {
             background: #FEF3C7;
             color: #92400E;
@@ -676,6 +860,18 @@
             font-weight: 800;
             font-size: 13px;
         }
+        .btn-del-trophy {
+            background: white;
+            border: 1px solid #FECACA;
+            color: #EF4444;
+            border-radius: 10px;
+            padding: 5px 10px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .btn-del-trophy:hover { background: #FEF2F2; }
+
         .trophy-comment {
             margin-top: 12px;
             padding: 12px 14px;
@@ -728,6 +924,8 @@
             .select-wrap { width: 100%; min-width: 0; }
             select { max-width: 100%; font-size: 14px; padding: 10px 12px; }
 
+            .reward-shop-grid { grid-template-columns: 1fr; }
+
             .exercise-layout { grid-template-columns: 1fr; }
             .question-nav {
                 order: -1;
@@ -759,7 +957,7 @@
         <div class="welcome-banner">
             <div>
                 <h1 class="welcome-title">🌈 Góc Học Tập Lớp 5</h1>
-                <p class="welcome-sub">Mỗi ngày một chút tiến bộ — Anh/chị luôn đồng hành cùng em! 💪</p>
+                <p class="welcome-sub">Ôn tập Tiếng Việt · Toán · Tiếng Anh</p>
             </div>
             <div class="welcome-badge" id="currentSubjectBadge">📖 Môn Tiếng Việt</div>
         </div>
@@ -784,9 +982,9 @@
 
         <div class="top-bar">
             <div class="tabs">
-                <button class="active-btn" onclick="showTab('tab-baitap', this)">📝 Làm Bài Tập</button>
-                <button onclick="showTab('tab-tuvung', this)">🃏 Thẻ Ghi Nhớ</button>
-                <button onclick="showTab('tab-bangvang', this)">🏆 Bảng Vàng</button>
+                <button class="active-btn" id="btnTabBaiTap" onclick="showTab('tab-baitap', this)">📝 Làm Bài Tập</button>
+                <button id="btnTabTuVung" onclick="showTab('tab-tuvung', this)">🃏 Thẻ Ghi Nhớ</button>
+                <button id="btnTabBangVang" onclick="showTab('tab-bangvang', this)">🏆 Bảng Vàng</button>
             </div>
 
             <div class="select-wrap">
@@ -827,7 +1025,7 @@
                 </div>
 
                 <div class="submit-bar">
-                    <button class="btn-nop" onclick="nopBai()">🎉 NỘP BÀI CHO ANH/CHỊ</button>
+                    <button class="btn-nop" onclick="nopBai()">🎉 NỘP BÀI</button>
                 </div>
             </div>
         </div>
@@ -858,31 +1056,39 @@
         </div>
 
         <div id="tab-bangvang" class="section">
+            <div id="khuVucDoiThuong" class="reward-panel"></div>
+            <div id="thongKe3MonBangVang" class="unified-summary-bar"></div>
             <div id="danhSachBangVang" class="trophy-grid"></div>
         </div>
     </div>
 
     <div id="modalChucMung" class="celebrate-overlay" onclick="dongModalChucMung()">
         <div class="celebrate-card" onclick="event.stopPropagation()">
-            <div style="font-size: 56px; margin-bottom: 10px;">🎉🌟🏆</div>
-            <h2 style="margin: 0 0 8px; font-size: 24px; font-weight: 900; color: #059669;">Hoan hô em giỏi quá!</h2>
+            <div style="font-size: 56px; margin-bottom: 10px;">🎉🏆</div>
+            <h2 style="margin: 0 0 8px; font-size: 24px; font-weight: 900; color: #059669;">Đã nộp bài thành công!</h2>
             <p style="margin: 0 0 20px; color: #475569; font-size: 15px;">
-                Em đã nộp bài thành công rồi! Anh/chị sẽ xem bài và gửi lời khen vào mục <strong>🏆 Bảng Vàng</strong> cho em nhé.
+                Bài làm đã được gửi đi. Kết quả, dấu tích và nhận xét sẽ hiển thị tại mục <strong>🏆 Bảng Vàng</strong>.
             </p>
-            <button class="btn-nop" style="padding: 13px 20px; font-size: 16px;" onclick="dongModalChucMung()">Tuyệt vời! Tiếp tục nào 🚀</button>
+            <button class="btn-nop" style="padding: 13px 20px; font-size: 16px;" onclick="chuyenSangBangVang()">Xem Bảng Vàng 🏆</button>
         </div>
     </div>
 
     <script type="module">
         import { db } from "./firebase-config.js";
         import {
-            collection, addDoc, onSnapshot, orderBy, query
+            collection, addDoc, onSnapshot, orderBy, query, doc, deleteDoc
         } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
         const SUBJECT_LABELS = {
             tiengviet: '📖 Môn Tiếng Việt',
             toan: '🔢 Môn Toán Học',
             tienganh: '🇬🇧 Môn Tiếng Anh'
+        };
+
+        const SUBJECT_PILLS = {
+            tiengviet: { text: '📖 Tiếng Việt', cls: 'sub-pill-tiengviet' },
+            toan: { text: '🔢 Toán', cls: 'sub-pill-toan' },
+            tienganh: { text: '🇬🇧 Tiếng Anh', cls: 'sub-pill-tienganh' }
         };
 
         let monHienTai = 'tiengviet';
@@ -894,6 +1100,7 @@
         let viTriThe = 0;
 
         let tatCaBaiNop = [];
+        let lichSuDoiQua = [];
 
         function escapeHtml(value) {
             const div = document.createElement('div');
@@ -918,14 +1125,13 @@
 
             capNhatDanhSachDeTheoMon();
             capNhatBoTuTheoMon();
-            renderBangVang();
         };
 
         window.showTab = (id, btn) => {
             document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
             document.getElementById(id).classList.add('active');
             document.querySelectorAll('.tabs button').forEach(el => el.classList.remove('active-btn'));
-            btn.classList.add('active-btn');
+            if (btn) btn.classList.add('active-btn');
 
             document.getElementById('chonDe').style.display = id === 'tab-baitap' ? 'block' : 'none';
             document.getElementById('chonBoTu').style.display = id === 'tab-tuvung' ? 'block' : 'none';
@@ -964,7 +1170,7 @@
                     <div class="empty-state-box">
                         <div style="font-size:42px;margin-bottom:8px;">🌤️</div>
                         <h3 style="margin:0 0 6px;color:var(--text-main);">Chưa có bài tập mới cho môn này</h3>
-                        <p style="margin:0;font-size:14px;">Em có thể chuyển sang tab <strong>🃏 Thẻ Ghi Nhớ</strong> để ôn bài hoặc chọn môn khác nhé!</p>
+                        <p style="margin:0;font-size:14px;">Chọn tab <strong>🃏 Thẻ Ghi Nhớ</strong> để ôn bài hoặc chuyển sang môn khác.</p>
                     </div>`;
                 return;
             }
@@ -1264,7 +1470,7 @@
                     } else if (!q.text.includes("___")) {
                         content += `
                             <textarea class="essay-answer" rows="3" data-qkey="${escapeHtml(q.key)}"
-                                placeholder="Em viết câu trả lời hoặc bài giải vào đây nhé..."></textarea>`;
+                                placeholder="Viết câu trả lời hoặc bài giải vào đây..."></textarea>`;
                     }
 
                     card.innerHTML = content;
@@ -1319,7 +1525,7 @@
 
         window.nopBai = async () => {
             if (!deHienTai) return;
-            if (!confirm("Em đã kiểm tra kỹ bài làm chưa? Bấm OK để nộp bài nhé! 🌟")) return;
+            if (!confirm("Xác nhận nộp bài? Bấm OK để gửi bài làm nhé!")) return;
 
             const dapAnHocSinh = {};
             for (const q of deHienTai.cauHoi) {
@@ -1328,7 +1534,7 @@
                     const values = Array.from(inputs).map(x => x.value.trim()).filter(Boolean);
                     dapAnHocSinh[q.key] = values.length ? values.join(" | ") : "Chưa làm";
                 } else {
-                    const chon = document.querySelector(`input[name="cau_${CSS.escape(q.key)}"]:checked`);
+                    const chon = document.querySelector(`input[name="cau_${escapeHtml(q.key)}"]:checked`);
                     dapAnHocSinh[q.key] = chon ? chon.value : "Chưa làm";
                 }
             }
@@ -1339,6 +1545,7 @@
                     idDe: deHienTai.id,
                     tenDe: deHienTai.ten,
                     dapAn: dapAnHocSinh,
+                    daTich: false,
                     thoiGianNop: Date.now()
                 });
 
@@ -1349,12 +1556,17 @@
                 deHienTai = null;
             } catch (e) {
                 console.error(e);
-                alert("Chưa nộp được bài do mạng yếu, em thử bấm nộp lại nhé!");
+                alert("Chưa nộp được bài do mạng yếu, vui lòng thử lại!");
             }
         };
 
         window.dongModalChucMung = () => {
             document.getElementById('modalChucMung').classList.remove('show');
+        };
+
+        window.chuyenSangBangVang = () => {
+            dongModalChucMung();
+            showTab('tab-bangvang', document.getElementById('btnTabBangVang'));
         };
 
         onSnapshot(query(collection(db, "tu_vung"), orderBy("thoiGianTao", "desc")), (snapshot) => {
@@ -1420,8 +1632,8 @@
         function capNhatGiaoDienThe() {
             const btnSpeak = document.getElementById('btnPhatAm');
             if (!danhSachTheLoc.length) {
-                document.getElementById('matTruocTu').textContent = "Chưa có thẻ nào!";
-                document.getElementById('matTruocPhienAm').textContent = "Anh/chị sẽ thêm thẻ cho môn này sớm nhé 🌟";
+                document.getElementById('matTruocTu').textContent = "Chưa có thẻ ghi nhớ";
+                document.getElementById('matTruocPhienAm').textContent = "Chưa có dữ liệu thẻ cho môn này.";
                 document.getElementById('matSauNghia').textContent = "";
                 document.getElementById('matSauLoai').textContent = "";
                 document.getElementById('boDemThe').textContent = "0 / 0";
@@ -1438,44 +1650,187 @@
             btnSpeak.style.display = 'inline-flex';
         }
 
+        // =========================================================================
+        // BẢNG VÀNG HỢP NHẤT 3 MÔN + TÍCH LŨY DẤU TÍCH + ĐỔI THƯỞNG
+        // =========================================================================
         onSnapshot(query(collection(db, "ketqua_hocsinh"), orderBy("thoiGianNop", "desc")), (snap) => {
             tatCaBaiNop = [];
             snap.forEach(d => tatCaBaiNop.push({ id: d.id, ...d.data() }));
             renderBangVang();
         });
 
-        function renderBangVang() {
-            const box = document.getElementById('danhSachBangVang');
-            const baiTheoMon = tatCaBaiNop.filter(b => (b.monHoc || 'tienganh') === monHienTai);
+        onSnapshot(query(collection(db, "lichsu_doithuong"), orderBy("thoiGianDoi", "desc")), (snap) => {
+            lichSuDoiQua = [];
+            snap.forEach(d => lichSuDoiQua.push({ id: d.id, ...d.data() }));
+            renderBangVang();
+        });
 
-            if (!baiTheoMon.length) {
+        function tinhSoDauTich() {
+            const tongTich = tatCaBaiNop.filter(b => b.daTich === true).length;
+            const daDoi = lichSuDoiQua.reduce((sum, item) => sum + (Number(item.soTichTieuHao) || 0), 0);
+            const hienCo = Math.max(0, tongTich - daDoi);
+            return { tongTich, daDoi, hienCo };
+        }
+
+        window.doiThuong = async (tenQua, soTich) => {
+            const { hienCo } = tinhSoDauTich();
+            if (hienCo < soTich) {
+                return alert(`Chưa đủ dấu tích (cần ${soTich} dấu tích, hiện có ${hienCo}).`);
+            }
+            if (!confirm(`Dùng ${soTich} dấu tích để đổi "${tenQua}" nhé?`)) return;
+
+            try {
+                await addDoc(collection(db, "lichsu_doithuong"), {
+                    tenQua,
+                    soTichTieuHao: soTich,
+                    daTrao: false,
+                    thoiGianDoi: Date.now()
+                });
+                alert(`🎉 Đổi thành công "${tenQua}"! Đã trừ ${soTich} dấu tích.`);
+            } catch (e) {
+                console.error(e);
+                alert("Có lỗi khi đổi thưởng, vui lòng thử lại.");
+            }
+        };
+
+        window.xoaLichSuDoiQuaHS = async (id) => {
+            if (!confirm("Xóa lượt đổi quà này (sẽ hoàn lại dấu tích)?")) return;
+            try {
+                await deleteDoc(doc(db, "lichsu_doithuong", id));
+            } catch (e) {
+                console.error(e);
+                alert("Không thể xóa lượt đổi quà.");
+            }
+        };
+
+        window.xoaBaiBangVang = async (id) => {
+            if (!confirm("Xóa bài nộp này khỏi Bảng Vàng?")) return;
+            try {
+                await deleteDoc(doc(db, "ketqua_hocsinh", id));
+            } catch (e) {
+                console.error(e);
+                alert("Không thể xóa bài này.");
+            }
+        };
+
+        function renderBangVang() {
+            const rewardPanel = document.getElementById('khuVucDoiThuong');
+            const summaryBar = document.getElementById('thongKe3MonBangVang');
+            const box = document.getElementById('danhSachBangVang');
+            const { tongTich, daDoi, hienCo } = tinhSoDauTich();
+
+            const duOreo = hienCo >= 5;
+            const duDoremon = hienCo >= 10;
+
+            let historyHtml = '';
+            if (lichSuDoiQua.length) {
+                historyHtml = `
+                    <div class="redeem-history-box">
+                        <span style="font-size:12px;font-weight:800;color:var(--text-sub);">🎁 Quà đã đổi:</span>
+                        ${lichSuDoiQua.map(q => {
+                            const statusText = q.daTrao ? '✅ Đã nhận' : '⏳ Chờ nhận';
+                            return `
+                                <span class="redeem-chip">
+                                    ${escapeHtml(q.tenQua)} (-${q.soTichTieuHao} ✅ · ${statusText})
+                                    <button type="button" class="btn-del-chip" onclick="xoaLichSuDoiQuaHS('${q.id}')" title="Xóa lượt đổi quà này">×</button>
+                                </span>`;
+                        }).join('')}
+                    </div>`;
+            }
+
+            rewardPanel.innerHTML = `
+                <div class="reward-header">
+                    <div>
+                        <h3 style="margin:0;font-size:18px;font-weight:900;">🎯 Tích Lũy Dấu Tích & Đổi Thưởng</h3>
+                        <div style="font-size:13px;color:var(--text-sub);margin-top:2px;">
+                            Tổng dấu tích đạt được: <strong>${tongTich}</strong> · Đã dùng đổi quà: <strong>${daDoi}</strong>
+                        </div>
+                    </div>
+                    <div class="tick-counter-badge">✅ Hiện có: ${hienCo} dấu tích</div>
+                </div>
+
+                <div class="reward-shop-grid">
+                    <div class="reward-item-card ${duOreo ? 'ready' : ''}">
+                        <div class="reward-item-info">
+                            <div class="reward-emoji">🍪</div>
+                            <div>
+                                <div class="reward-name">1 Bánh Oreo</div>
+                                <div class="reward-cost">Cần 5 dấu tích</div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-redeem" ${duOreo ? '' : 'disabled'} onclick="doiThuong('1 Bánh Oreo', 5)">
+                            ${duOreo ? 'Đổi ngay (-5 ✅)' : `Thiếu ${5 - hienCo} ✅`}
+                        </button>
+                    </div>
+
+                    <div class="reward-item-card ${duDoremon ? 'ready' : ''}">
+                        <div class="reward-item-info">
+                            <div class="reward-emoji">🥞</div>
+                            <div>
+                                <div class="reward-name">1 Bánh Doremon</div>
+                                <div class="reward-cost">Cần 10 dấu tích</div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-redeem" ${duDoremon ? '' : 'disabled'} onclick="doiThuong('1 Bánh Doremon', 10)">
+                            ${duDoremon ? 'Đổi ngay (-10 ✅)' : `Thiếu ${10 - hienCo} ✅`}
+                        </button>
+                    </div>
+                </div>
+                ${historyHtml}
+            `;
+
+            const countTV = tatCaBaiNop.filter(b => (b.monHoc || 'tienganh') === 'tiengviet').length;
+            const countToan = tatCaBaiNop.filter(b => (b.monHoc || 'tienganh') === 'toan').length;
+            const countTA = tatCaBaiNop.filter(b => (b.monHoc || 'tienganh') === 'tienganh').length;
+
+            summaryBar.innerHTML = `
+                <span>🏆 Bảng Vàng tổng hợp cả 3 môn (<strong>${tatCaBaiNop.length}</strong> bài đã làm):</span>
+                <div class="unified-counts">
+                    <span class="sub-pill sub-pill-tiengviet">📖 Tiếng Việt: ${countTV}</span>
+                    <span class="sub-pill sub-pill-toan">🔢 Toán: ${countToan}</span>
+                    <span class="sub-pill sub-pill-tienganh">🇬🇧 Tiếng Anh: ${countTA}</span>
+                </div>
+            `;
+
+            if (!tatCaBaiNop.length) {
                 box.innerHTML = `
                     <div class="empty-state-box">
                         <div style="font-size:42px;margin-bottom:8px;">🏆</div>
-                        <h3 style="margin:0 0 6px;color:var(--text-main);">Bảng Vàng đang chờ huy chương đầu tiên!</h3>
-                        <p style="margin:0;font-size:14px;">Hoàn thành một bài tập để nhận điểm và lời khen từ anh/chị nhé 🌟</p>
+                        <h3 style="margin:0 0 6px;color:var(--text-main);">Chưa có bài nộp nào trên Bảng Vàng</h3>
+                        <p style="margin:0;font-size:14px;">Hoàn thành bài tập ở cả 3 môn để tích lũy dấu tích đổi quà nhé!</p>
                     </div>`;
                 return;
             }
 
-            box.innerHTML = baiTheoMon.map(b => {
+            box.innerHTML = tatCaBaiNop.map(b => {
+                const subInfo = SUBJECT_PILLS[b.monHoc] || SUBJECT_PILLS.tienganh;
                 const ngay = b.thoiGianNop ? new Date(b.thoiGianNop).toLocaleString('vi-VN') : '';
+
+                const tickBadge = b.daTich
+                    ? `<span class="trophy-tick-badge">✅ Đạt dấu tích</span>`
+                    : '';
+
                 const scoreBadge = b.diemSo
                     ? `<span class="trophy-score">⭐ ${escapeHtml(b.diemSo)}</span>`
-                    : `<span class="trophy-score" style="background:#F1F5F9;color:#475569;border-color:#E2E8F0;">⏳ Đang chờ chấm</span>`;
+                    : (!b.daTich ? `<span class="trophy-score" style="background:#F1F5F9;color:#475569;border-color:#E2E8F0;">⏳ Đang chờ chấm</span>` : '');
 
                 const commentBlock = b.nhanXetGV
-                    ? `<div class="trophy-comment">💌 <strong>Lời khen của anh/chị:</strong> ${escapeHtml(b.nhanXetGV)}</div>`
+                    ? `<div class="trophy-comment">💬 <strong>Nhận xét:</strong> ${escapeHtml(b.nhanXetGV)}</div>`
                     : '';
 
                 return `
-                    <div class="trophy-card">
+                    <div class="trophy-card ${b.daTich ? 'has-tick' : ''}">
                         <div class="trophy-top">
                             <div>
+                                <span class="sub-pill ${subInfo.cls}">${subInfo.text}</span>
                                 <h3 class="trophy-title">${escapeHtml(b.tenDe || 'Bài tập')}</h3>
                                 <div style="font-size:13px;color:var(--text-sub);margin-top:3px;">🕒 Nộp lúc: ${ngay}</div>
                             </div>
-                            ${scoreBadge}
+                            <div class="trophy-badges">
+                                ${tickBadge}
+                                ${scoreBadge}
+                                <button type="button" class="btn-del-trophy" onclick="xoaBaiBangVang('${b.id}')" title="Xóa bài nộp này">🗑️ Xóa</button>
+                            </div>
                         </div>
                         ${commentBlock}
                     </div>`;
