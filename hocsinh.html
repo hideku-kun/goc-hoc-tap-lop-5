@@ -896,12 +896,11 @@
         let tatCaBaiNop = [];
 
         function escapeHtml(value) {
-            return String(value ?? "")
-                .replace(/&/g, "&")
-                .replace(/</g, "<")
-                .replace(/>/g, ">")
-                .replace(/"/g, """)
-                .replace(/'/g, "'");
+            const div = document.createElement('div');
+            div.textContent = String(value ?? '');
+            return div.innerHTML
+                .split(String.fromCharCode(34)).join('&' + 'quot;')
+                .split(String.fromCharCode(39)).join('&' + '#039;');
         }
 
         window.chonMonHoc = (mon) => {
