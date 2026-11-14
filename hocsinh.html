@@ -22,7 +22,6 @@
             --shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
         }
 
-        /* Đổi bảng màu tự động theo từng môn */
         body[data-subject="tiengviet"] {
             --primary: #EA580C;
             --primary-dark: #C2410C;
@@ -66,7 +65,6 @@
             padding: 16px;
         }
 
-        /* Banner chào mừng */
         .welcome-banner {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
@@ -100,7 +98,6 @@
             white-space: nowrap;
         }
 
-        /* 3 Thẻ chọn môn học lớn */
         .subject-hub {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -169,7 +166,6 @@
         }
         .subject-card.active[data-sub="tienganh"] .subject-count { background: #0D9488; color: white; }
 
-        /* Thanh công cụ dính */
         .top-bar {
             position: sticky;
             top: 8px;
@@ -241,7 +237,6 @@
         .section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Danh sách thẻ bài tập chọn nhanh */
         .quick-de-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -288,7 +283,6 @@
             color: var(--text-sub);
         }
 
-        /* Khu vực làm bài */
         .exercise-shell { display: none; }
 
         .exercise-header {
@@ -403,7 +397,6 @@
             border-color: var(--success);
         }
 
-        /* Phần & Thẻ câu hỏi */
         .student-section { margin: 4px 0 16px; }
         .student-section-title {
             padding: 13px 16px;
@@ -468,7 +461,6 @@
             vertical-align: middle;
         }
 
-        /* Đáp án trắc nghiệm to rõ dễ chạm */
         .options-list {
             display: grid;
             gap: 10px;
@@ -514,7 +506,6 @@
             color: white;
         }
 
-        /* Ô điền từ & Giải toán tự luận */
         .inline-answer {
             display: inline-block;
             padding: 6px 12px;
@@ -575,7 +566,6 @@
         }
         .btn-nop:active { transform: scale(0.98); }
 
-        /* Thẻ ghi nhớ 3D */
         .flashcard-wrapper {
             max-width: 540px;
             margin: 10px auto;
@@ -661,7 +651,6 @@
         }
         .btn-nav:active { background: var(--primary-soft); }
 
-        /* Bảng vàng & Lời khen */
         .trophy-grid { display: grid; gap: 14px; }
         .trophy-card {
             background: var(--surface);
@@ -698,7 +687,6 @@
             font-weight: 600;
         }
 
-        /* Modal chúc mừng nộp bài */
         .celebrate-overlay {
             display: none;
             position: fixed;
@@ -723,7 +711,6 @@
         }
         @keyframes popIn { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-        /* Tối ưu riêng cho màn hình điện thoại */
         @media (max-width: 860px) {
             .container { padding: 12px; }
             .welcome-banner { padding: 14px 16px; border-radius: 18px; }
@@ -769,16 +756,14 @@
 </head>
 <body data-subject="tiengviet">
     <div class="container">
-        <!-- Banner chào mừng -->
         <div class="welcome-banner">
             <div>
                 <h1 class="welcome-title">🌈 Góc Học Tập Lớp 5</h1>
-                <p class="welcome-sub">Mỗi ngày một chút tiến bộ💪</p>
+                <p class="welcome-sub">Mỗi ngày một chút tiến bộ — Anh/chị luôn đồng hành cùng em! 💪</p>
             </div>
             <div class="welcome-badge" id="currentSubjectBadge">📖 Môn Tiếng Việt</div>
         </div>
 
-        <!-- 3 Thẻ chọn môn học -->
         <div class="subject-hub">
             <div class="subject-card active" data-sub="tiengviet" onclick="chonMonHoc('tiengviet')">
                 <div class="subject-icon">📖</div>
@@ -797,7 +782,6 @@
             </div>
         </div>
 
-        <!-- Thanh công cụ dính -->
         <div class="top-bar">
             <div class="tabs">
                 <button class="active-btn" onclick="showTab('tab-baitap', this)">📝 Làm Bài Tập</button>
@@ -815,7 +799,6 @@
             </div>
         </div>
 
-        <!-- TAB 1: LÀM BÀI TẬP -->
         <div id="tab-baitap" class="section active">
             <div id="manHinhChonBai"></div>
 
@@ -849,7 +832,6 @@
             </div>
         </div>
 
-        <!-- TAB 2: THẺ GHI NHỚ (FLASHCARDS) -->
         <div id="tab-tuvung" class="section">
             <div class="flashcard-wrapper">
                 <div class="flashcard-container" onclick="latThe()">
@@ -875,13 +857,11 @@
             </div>
         </div>
 
-        <!-- TAB 3: BẢNG VÀNG & LỜI KHEN -->
         <div id="tab-bangvang" class="section">
             <div id="danhSachBangVang" class="trophy-grid"></div>
         </div>
     </div>
 
-    <!-- Modal chúc mừng khi nộp bài xong -->
     <div id="modalChucMung" class="celebrate-overlay" onclick="dongModalChucMung()">
         <div class="celebrate-card" onclick="event.stopPropagation()">
             <div style="font-size: 56px; margin-bottom: 10px;">🎉🌟🏆</div>
@@ -1015,7 +995,6 @@
             taiDeBai();
         };
 
-        // Parser tách Phần, Hướng dẫn, Câu hỏi & Đáp án
         function isSectionHeader(line) {
             const clean = line.trim().replace(/^#+\s*/, '');
             return /^(?:(?:PHẦN|PHAN|PART)\s+[A-Z0-9]+|[IVX]+\.\s+.+)(?:\s*[-–—:.)]\s*.*)?$/i.test(clean);
@@ -1379,9 +1358,6 @@
             document.getElementById('modalChucMung').classList.remove('show');
         };
 
-        // =========================================================================
-        // THẺ GHI NHỚ (FLASHCARDS) + GIỌNG ĐỌC
-        // =========================================================================
         onSnapshot(query(collection(db, "tu_vung"), orderBy("thoiGianTao", "desc")), (snapshot) => {
             tatCaThe = [];
             snapshot.forEach(docSnap => {
@@ -1463,9 +1439,6 @@
             btnSpeak.style.display = 'inline-flex';
         }
 
-        // =========================================================================
-        // BẢNG VÀNG & LỜI KHEN TỪ GIA SƯ
-        // =========================================================================
         onSnapshot(query(collection(db, "ketqua_hocsinh"), orderBy("thoiGianNop", "desc")), (snap) => {
             tatCaBaiNop = [];
             snap.forEach(d => tatCaBaiNop.push({ id: d.id, ...d.data() }));

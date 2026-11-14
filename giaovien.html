@@ -113,7 +113,6 @@
         .section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Thanh lọc môn học */
         .subject-filter-bar {
             display: flex;
             gap: 8px;
@@ -237,7 +236,6 @@
         th, td { padding: 13px 14px; border-bottom: 1px solid var(--border); font-size: 14px; vertical-align: middle; }
         th { background: #F9FAFB; font-weight: 700; color: var(--text-sub); font-size: 13px; }
 
-        /* Thanh mẫu đề nhanh */
         .sample-bar {
             display: flex;
             gap: 8px;
@@ -302,7 +300,6 @@
             font-size: 12px;
         }
 
-        /* Xem trước đề */
         .exam-preview {
             display: none;
             margin-top: 20px;
@@ -400,7 +397,6 @@
             font-weight: 600;
         }
 
-        /* Modals */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -598,7 +594,6 @@
             border-color: var(--primary);
         }
 
-        /* Mô phỏng giao diện học sinh trong modal */
         .student-preview-meta { font-weight: 700; color: var(--primary); margin-bottom: 12px; }
         .student-preview-section { margin-bottom: 16px; }
         .student-preview-section-title {
@@ -683,7 +678,6 @@
                 <button onclick="showTab('tuvung', this)">🃏 Kho Thẻ Ghi Nhớ</button>
             </div>
 
-            <!-- TAB 1: NHẬT KÝ & BÁO CÁO -->
             <div id="diemdanh" class="section active">
                 <div class="input-group">
                     <input type="date" id="ngayHoc">
@@ -709,7 +703,6 @@
                 </div>
             </div>
 
-            <!-- TAB 2: TIẾN ĐỘ & CHẤM BÀI -->
             <div id="tiendo" class="section">
                 <div class="subject-filter-bar" id="filterTienDo">
                     <span style="font-size: 13px; font-weight: 700; color: var(--text-sub);">Lọc theo môn:</span>
@@ -735,7 +728,6 @@
                 </div>
             </div>
 
-            <!-- TAB 3: QUẢN LÝ ĐỀ 3 MÔN -->
             <div id="kiemtra" class="section">
                 <h3 style="margin-top: 0;">Soạn & Phát hành đề bài mới</h3>
 
@@ -816,7 +808,6 @@
                 </div>
             </div>
 
-            <!-- TAB 4: KHO THẺ GHI NHỚ -->
             <div id="tuvung" class="section">
                 <div class="input-group">
                     <select id="monTuVung" style="flex: 1;">
@@ -857,7 +848,6 @@
         </div>
     </div>
 
-    <!-- Modal xem đề như học sinh -->
     <div id="modalXemNhuHocSinh" class="modal-overlay" onclick="if(event.target.id==='modalXemNhuHocSinh') dongModalXemNhuHocSinh()">
         <div class="submission-modal" role="dialog" aria-modal="true">
             <div class="submission-header">
@@ -871,7 +861,6 @@
         </div>
     </div>
 
-    <!-- Modal xem bài học sinh & gửi lời khen -->
     <div id="modalBaiLam" class="modal-overlay" onclick="dongModalNeuClickNen(event)">
         <div class="submission-modal" role="dialog" aria-modal="true" aria-labelledby="modalSubmissionTitle">
             <div class="submission-header">
@@ -947,9 +936,6 @@
             btn.classList.add('active-btn');
         };
 
-        // =========================================================================
-        // 1. NHẬT KÝ & ĐIỂM DANH
-        // =========================================================================
         window.themDiemDanh = async () => {
             const ngay = document.getElementById('ngayHoc').value;
             const monHoc = document.getElementById('monDiemDanh').value;
@@ -1003,9 +989,6 @@
             l.click();
         };
 
-        // =========================================================================
-        // 2. PARSER ĐỀ THI ĐỒNG BỘ 100% VỚI GIAO DIỆN HỌC SINH
-        // =========================================================================
         function isSectionHeader(line) {
             const clean = line.trim().replace(/^#+\s*/, '');
             return /^(?:(?:PHẦN|PHAN|PART)\s+[A-Z0-9]+|[IVX]+\.\s+.+)(?:\s*[-–—:.)]\s*.*)?$/i.test(clean);
@@ -1165,57 +1148,60 @@
             };
         }
 
-        // =========================================================================
-        // 3. QUẢN LÝ ĐỀ 3 MÔN
-        // =========================================================================
         window.chenMauDe = (mon) => {
             document.getElementById('monDe').value = mon;
             if (mon === 'tiengviet') {
                 document.getElementById('tenDe').value = 'Tiếng Việt Lớp 5 - Ôn tập Từ láy & Đọc hiểu';
                 document.getElementById('loaiDe').value = 'tracnghiem';
-                document.getElementById('noiDungDe').value = `PHẦN A - ĐỌC HIỂU & LUYỆN TỪ VÀ CÂU
-Đọc đoạn văn sau và chọn câu trả lời đúng:
-"Mùa xuân, cây gạo gọi đến bao nhiêu là chim. Từ xa nhìn lại, cây gạo sừng sững như một tháp đèn khổng lồ."
-
-1. Hình ảnh cây gạo mùa xuân được so sánh với sự vật nào?
-A. Một ngọn núi cao
-B. Một tháp đèn khổng lồ
-C. Một chiếc ô xanh mát
-D. Một tòa lâu đài
-ANSWER: B
-
-2. Từ nào dưới đây là từ láy?
-A. Cây gạo
-B. Sừng sững
-C. Khổng lồ
-D. Mùa xuân
-ANSWER: B`;
+                document.getElementById('noiDungDe').value = [
+                    'PHẦN A - ĐỌC HIỂU & LUYỆN TỪ VÀ CÂU',
+                    'Đọc đoạn văn sau và chọn câu trả lời đúng:',
+                    '"Mùa xuân, cây gạo gọi đến bao nhiêu là chim. Từ xa nhìn lại, cây gạo sừng sững như một tháp đèn khổng lồ."',
+                    '',
+                    '1. Hình ảnh cây gạo mùa xuân được so sánh với sự vật nào?',
+                    'A. Một ngọn núi cao',
+                    'B. Một tháp đèn khổng lồ',
+                    'C. Một chiếc ô xanh mát',
+                    'D. Một tòa lâu đài',
+                    'ANSWER: B',
+                    '',
+                    '2. Từ nào dưới đây là từ láy?',
+                    'A. Cây gạo',
+                    'B. Sừng sững',
+                    'C. Khổng lồ',
+                    'D. Mùa xuân',
+                    'ANSWER: B'
+                ].join('\n');
             } else if (mon === 'toan') {
                 document.getElementById('tenDe').value = 'Toán Lớp 5 - Ôn tập Phân số & Số thập phân';
                 document.getElementById('loaiDe').value = 'dientu';
-                document.getElementById('noiDungDe').value = `PHẦN A - ĐIỀN SỐ THÍCH HỢP VÀO CHỖ TRỐNG
-1. Phân số 3/4 viết dưới dạng số thập phân là: ___
-2. Một hình chữ nhật có chiều dài 12 cm, chiều rộng 8 cm. Diện tích hình chữ nhật đó là: ___ cm².
-
-PHẦN B - GIẢI TOÁN CÓ LỜI VĂN
-3. Một mảnh vườn hình chữ nhật có chiều dài 24 m, chiều rộng bằng 2/3 chiều dài. Tính chu vi và diện tích mảnh vườn đó.`;
+                document.getElementById('noiDungDe').value = [
+                    'PHẦN A - ĐIỀN SỐ THÍCH HỢP VÀO CHỖ TRỐNG',
+                    '1. Phân số 3/4 viết dưới dạng số thập phân là: ___',
+                    '2. Một hình chữ nhật có chiều dài 12 cm, chiều rộng 8 cm. Diện tích hình chữ nhật đó là: ___ cm².',
+                    '',
+                    'PHẦN B - GIẢI TOÁN CÓ LỜI VĂN',
+                    '3. Một mảnh vườn hình chữ nhật có chiều dài 24 m, chiều rộng bằng 2/3 chiều dài. Tính chu vi và diện tích mảnh vườn đó.'
+                ].join('\n');
             } else {
                 document.getElementById('tenDe').value = 'Tiếng Anh Lớp 5 - Unit 1: All about me';
                 document.getElementById('loaiDe').value = 'tracnghiem';
-                document.getElementById('noiDungDe').value = `PART A - CHOOSE THE CORRECT ANSWER
-1. Where ___ you from? – I'm from Viet Nam.
-A. is
-B. am
-C. are
-D. be
-ANSWER: C
-
-2. What's your favorite ___? – It's blue.
-A. color
-B. animal
-C. sport
-D. food
-ANSWER: A`;
+                document.getElementById('noiDungDe').value = [
+                    'PART A - CHOOSE THE CORRECT ANSWER',
+                    '1. Where ___ you from? – I am from Viet Nam.',
+                    'A. is',
+                    'B. am',
+                    'C. are',
+                    'D. be',
+                    'ANSWER: C',
+                    '',
+                    '2. What is your favorite ___? – It is blue.',
+                    'A. color',
+                    'B. animal',
+                    'C. sport',
+                    'D. food',
+                    'ANSWER: A'
+                ].join('\n');
             }
             capNhatGoiYNhapDe();
             xemTruocDe();
@@ -1454,9 +1440,6 @@ ANSWER: A`;
             await deleteDoc(doc(db, "danhsach_de", id));
         };
 
-        // =========================================================================
-        // 4. TIẾN ĐỘ HỌC SINH & MODAL CHẤM BÀI / GỬI LỜI KHEN
-        // =========================================================================
         let allBaiNopCache = [];
         let currentFilterTienDo = 'all';
 
@@ -1671,9 +1654,6 @@ ANSWER: A`;
             }
         });
 
-        // =========================================================================
-        // 5. KHO THẺ GHI NHỚ (TIẾNG ANH, TIẾNG VIỆT & CÔNG THỨC TOÁN)
-        // =========================================================================
         window.themTuNhanh = async () => {
             const monHoc = document.getElementById('monTuVung').value;
             const tenBo = document.getElementById('tenBoTu').value.trim();
