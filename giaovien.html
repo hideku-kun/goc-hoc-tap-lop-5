@@ -153,6 +153,66 @@
         .badge-tienganh { background: var(--ta-bg); color: var(--ta-color); border: 1px solid #99F6E4; }
         .badge-chung { background: #F3F4F6; color: #374151; border: 1px solid #E5E7EB; }
 
+        .reward-summary-bar {
+            background: #F8FAFC;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 14px 18px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .tick-pill-gv {
+            background: #ECFDF5;
+            color: #065F46;
+            border: 1px solid #6EE7B7;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-weight: 800;
+            font-size: 13px;
+        }
+        .gift-request-list {
+            width: 100%;
+            margin-top: 8px;
+            padding-top: 10px;
+            border-top: 1px dashed var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .gift-request-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+            background: #FFFBEB;
+            border: 1px solid #FDE68A;
+            padding: 8px 12px;
+            border-radius: 10px;
+            font-size: 13px;
+        }
+
+        .btn-tick-toggle {
+            padding: 6px 11px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            border: 1px solid #A7F3D0;
+            background: #ECFDF5;
+            color: #065F46;
+        }
+        .btn-tick-toggle.is-ticked {
+            background: #10B981;
+            border-color: #059669;
+            color: white;
+        }
+
         .input-group {
             display: flex;
             gap: 12px;
@@ -447,7 +507,7 @@
 
         .submission-body {
             display: grid;
-            grid-template-columns: 270px 1fr;
+            grid-template-columns: 280px 1fr;
             flex: 1;
             overflow: hidden;
         }
@@ -487,13 +547,35 @@
             border: 1px solid #FDE68A;
         }
         .feedback-box h5 { margin: 0 0 8px; font-size: 13px; color: #92400E; }
-        .feedback-box input, .feedback-box textarea {
+        .feedback-box input[type="text"], .feedback-box textarea {
             width: 100%;
             min-width: 0;
             padding: 8px 10px;
             font-size: 13px;
             margin-bottom: 8px;
             min-height: unset;
+        }
+        .tick-checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            font-size: 13px;
+            color: #065F46;
+            background: #ECFDF5;
+            padding: 9px 10px;
+            border-radius: 8px;
+            border: 1px solid #A7F3D0;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+        .tick-checkbox-label input {
+            width: 18px;
+            height: 18px;
+            min-width: 18px;
+            margin: 0;
+            accent-color: #10B981;
+            cursor: pointer;
         }
 
         .submission-content {
@@ -656,7 +738,7 @@
 
         @media (max-width: 768px) {
             .submission-body { grid-template-columns: 1fr; }
-            .submission-nav { border-right: none; border-bottom: 1px solid var(--border); max-height: 220px; }
+            .submission-nav { border-right: none; border-bottom: 1px solid var(--border); max-height: 240px; }
         }
     </style>
 </head>
@@ -665,7 +747,7 @@
         <div class="header">
             <div class="header-left">
                 <h2>👨‍🏫 Bảng Điều Khiển Gia Sư — Lớp 5</h2>
-                <p>Hệ thống ôn tập Tiếng Việt · Toán · Tiếng Anh đồng hành cùng em</p>
+                <p>Hệ thống ôn tập Tiếng Việt · Toán · Tiếng Anh</p>
             </div>
             <a href="hocsinh.html" target="_blank" class="btn-student-link">📱 Mở trang Học sinh</a>
         </div>
@@ -704,6 +786,8 @@
             </div>
 
             <div id="tiendo" class="section">
+                <div id="thongKeDoiThuongGV" class="reward-summary-bar"></div>
+
                 <div class="subject-filter-bar" id="filterTienDo">
                     <span style="font-size: 13px; font-weight: 700; color: var(--text-sub);">Lọc theo môn:</span>
                     <button class="filter-pill active" onclick="locTienDo('all', this)">Tất cả</button>
@@ -719,8 +803,8 @@
                                 <th>Môn học</th>
                                 <th>Tên Đề</th>
                                 <th>Ngày nộp</th>
-                                <th>Điểm / Lời khen</th>
-                                <th>Chi tiết bài làm</th>
+                                <th>Đánh giá & Dấu tích</th>
+                                <th>Hành động</th>
                             </tr>
                         </thead>
                         <tbody id="bangTienDo"></tbody>
@@ -770,7 +854,7 @@
                     <span id="formatHelpContent">
                         • Chia phần: <code>PHẦN A - TRẮC NGHIỆM</code>, <code>PHẦN B - TỰ LUẬN</code><br>
                         • Trắc nghiệm: <code>1. Nội dung câu hỏi...</code> → <code>A. ...</code> <code>B. ...</code> <code>C. ...</code> <code>D. ...</code> → <code>ANSWER: B</code><br>
-                        • Điền từ / Giải toán: Dùng <code>___</code> để tạo ô điền ngắn giữa câu, hoặc viết câu hỏi bình thường (không có <code>___</code>) để em có khung viết bài giải/đoạn văn rộng rãi.
+                        • Điền từ / Giải toán: Dùng <code>___</code> để tạo ô điền ngắn giữa câu, hoặc viết câu hỏi bình thường (không có <code>___</code>) để có khung viết bài giải/đoạn văn rộng rãi.
                     </span>
                 </div>
 
@@ -817,9 +901,7 @@
                     </select>
                     <input type="text" id="tenBoTu" placeholder="Tên chủ đề (VD: Unit 1, Công thức Hình học, Thành ngữ)..." style="flex: 2;">
                 </div>
-                <textarea id="nhapNhanh" placeholder="-- NHẬP MỖI THẺ 1 DÒNG --
-• Tiếng Anh nhanh: butterfly = con bướm (tự lấy phiên âm & phát âm)
-• Đầy đủ 4 cột: Diện tích hình thang | S = (a + b) × h : 2 | Hình học | Tổng hai đáy nhân chiều cao chia 2" style="min-height: 170px;"></textarea>
+                <textarea id="nhapNhanh" placeholder="-- NHẬP MỖI THẺ 1 DÒNG --&#10;• Tiếng Anh nhanh: butterfly = con bướm (tự lấy phiên âm & phát âm)&#10;• Đầy đủ 4 cột: Diện tích hình thang | S = (a + b) × h : 2 | Hình học | Tổng hai đáy nhân chiều cao chia 2" style="min-height: 170px;"></textarea>
                 <button class="btn-main" style="margin-top: 12px;" onclick="themTuNhanh()" id="btnTaoThe">⚡ Tạo bộ thẻ ghi nhớ</button>
 
                 <div class="subject-filter-bar" style="margin-top: 24px;" id="filterTuVung">
@@ -877,10 +959,14 @@
                     <div id="modalQuestionGrid" class="submission-number-grid"></div>
 
                     <div class="feedback-box">
-                        <h5>🌟 Chấm điểm & Gửi lời khen cho em</h5>
-                        <input type="text" id="inputDiemSo" placeholder="Điểm / Đánh giá (VD: 9/10 - Rất giỏi!)">
-                        <textarea id="inputNhanXetGV" rows="3" placeholder="Viết lời động viên để em đọc trên Bảng Vàng..."></textarea>
-                        <button type="button" class="btn-main" style="width: 100%; padding: 8px; font-size: 13px;" onclick="luuNhanXetBaiLam()">💾 Lưu lời khen</button>
+                        <h5>🌟 Chấm điểm & Cấp dấu tích</h5>
+                        <label class="tick-checkbox-label">
+                            <input type="checkbox" id="inputDauTich">
+                            <span>✅ Cấp 1 dấu tích (đổi thưởng)</span>
+                        </label>
+                        <input type="text" id="inputDiemSo" placeholder="Điểm / Đánh giá (VD: 9/10)...">
+                        <textarea id="inputNhanXetGV" rows="3" placeholder="Nhận xét hiển thị trên Bảng Vàng..."></textarea>
+                        <button type="button" class="btn-main" style="width: 100%; padding: 8px; font-size: 13px;" onclick="luuNhanXetBaiLam()">💾 Lưu đánh giá</button>
                     </div>
                 </aside>
 
@@ -935,6 +1021,9 @@
             btn.classList.add('active-btn');
         };
 
+        // =========================================================================
+        // 1. NHẬT KÝ & ĐIỂM DANH
+        // =========================================================================
         window.themDiemDanh = async () => {
             const ngay = document.getElementById('ngayHoc').value;
             const monHoc = document.getElementById('monDiemDanh').value;
@@ -988,6 +1077,9 @@
             l.click();
         };
 
+        // =========================================================================
+        // 2. PARSER ĐỀ THI
+        // =========================================================================
         function isSectionHeader(line) {
             const clean = line.trim().replace(/^#+\s*/, '');
             return /^(?:(?:PHẦN|PHAN|PART)\s+[A-Z0-9]+|[IVX]+\.\s+.+)(?:\s*[-–—:.)]\s*.*)?$/i.test(clean);
@@ -1147,6 +1239,9 @@
             };
         }
 
+        // =========================================================================
+        // 3. QUẢN LÝ ĐỀ 3 MÔN
+        // =========================================================================
         window.chenMauDe = (mon) => {
             document.getElementById('monDe').value = mon;
             if (mon === 'tiengviet') {
@@ -1439,20 +1534,103 @@
             await deleteDoc(doc(db, "danhsach_de", id));
         };
 
+        // =========================================================================
+        // 4. TIẾN ĐỘ HỌC SINH, CẤP DẤU TÍCH & QUẢN LÝ ĐỔI THƯỞNG
+        // =========================================================================
         let allBaiNopCache = [];
+        let lichSuDoiQuaCache = [];
         let currentFilterTienDo = 'all';
 
         onSnapshot(query(collection(db, "ketqua_hocsinh"), orderBy("thoiGianNop", "desc")), (s) => {
             allBaiNopCache = [];
             s.forEach(d => allBaiNopCache.push({ id: d.id, ...d.data() }));
+            renderThongKeDoiThuongGV();
             renderBangTienDo();
         });
+
+        onSnapshot(query(collection(db, "lichsu_doithuong"), orderBy("thoiGianDoi", "desc")), (s) => {
+            lichSuDoiQuaCache = [];
+            s.forEach(d => lichSuDoiQuaCache.push({ id: d.id, ...d.data() }));
+            renderThongKeDoiThuongGV();
+        });
+
+        function renderThongKeDoiThuongGV() {
+            const box = document.getElementById('thongKeDoiThuongGV');
+            if (!box) return;
+
+            const tongTich = allBaiNopCache.filter(b => b.daTich === true).length;
+            const daDoi = lichSuDoiQuaCache.reduce((sum, item) => sum + (Number(item.soTichTieuHao) || 0), 0);
+            const hienCo = Math.max(0, tongTich - daDoi);
+
+            let giftsHtml = '';
+            if (lichSuDoiQuaCache.length) {
+                giftsHtml = `
+                    <div class="gift-request-list">
+                        <strong style="font-size:13px;color:#92400E;">🎁 Lịch sử đổi bánh trên Bảng Vàng:</strong>
+                        ${lichSuDoiQuaCache.map(g => {
+                            const ngay = g.thoiGianDoi ? new Date(g.thoiGianDoi).toLocaleString('vi-VN') : '';
+                            return `
+                                <div class="gift-request-item">
+                                    <div>
+                                        <strong>${escapeHtml(g.tenQua)}</strong> (-${g.soTichTieuHao} ✅) · <span style="color:var(--text-sub);">${ngay}</span>
+                                    </div>
+                                    <div style="display:flex;gap:6px;align-items:center;">
+                                        <button type="button" class="btn-view-submission" onclick="doiTrangThaiQua('${g.id}', ${!g.daTrao})">
+                                            ${g.daTrao ? '✅ Đã trao bánh' : '⏳ Đánh dấu đã trao'}
+                                        </button>
+                                        <button type="button" class="btn-delete" onclick="xoaLichSuQua('${g.id}')">Xóa</button>
+                                    </div>
+                                </div>`;
+                        }).join('')}
+                    </div>`;
+            }
+
+            box.innerHTML = `
+                <div>
+                    <strong style="font-size:14px;">🎯 Tích lũy dấu tích đổi thưởng</strong>
+                    <div style="font-size:12px;color:var(--text-sub);">5 dấu tích = 1 Bánh Oreo · 10 dấu tích = 1 Bánh Doremon</div>
+                </div>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+                    <span class="tick-pill-gv">✅ Hiện có: ${hienCo} dấu tích</span>
+                    <span style="font-size:12px;color:var(--text-sub);">(Tổng cấp: ${tongTich} · Đã đổi: ${daDoi})</span>
+                </div>
+                ${giftsHtml}
+            `;
+        }
+
+        window.doiTrangThaiQua = async (id, daTrao) => {
+            await updateDoc(doc(db, "lichsu_doithuong", id), { daTrao });
+        };
+
+        window.xoaLichSuQua = async (id) => {
+            if (!confirm("Xóa lượt đổi quà này (sẽ hoàn lại dấu tích)?")) return;
+            await deleteDoc(doc(db, "lichsu_doithuong", id));
+        };
+
+        window.toggleDauTichNhanh = async (id, trangThaiMoi) => {
+            try {
+                await updateDoc(doc(db, "ketqua_hocsinh", id), { daTich: trangThaiMoi });
+            } catch (e) {
+                console.error(e);
+                alert("Không thể cập nhật dấu tích.");
+            }
+        };
 
         window.locTienDo = (mon, btn) => {
             currentFilterTienDo = mon;
             document.querySelectorAll('#filterTienDo .filter-pill').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             renderBangTienDo();
+        };
+
+        window.xoaBaiNop = async (id) => {
+            if (!confirm("Xóa bài nộp này khỏi danh sách và Bảng Vàng?")) return;
+            try {
+                await deleteDoc(doc(db, "ketqua_hocsinh", id));
+            } catch (e) {
+                console.error(e);
+                alert("Không thể xóa bài nộp.");
+            }
         };
 
         function renderBangTienDo() {
@@ -1469,17 +1647,28 @@
             }
 
             filtered.forEach(dt => {
-                const badgeKhen = dt.diemSo || dt.nhanXetGV
-                    ? `<span style="background:#ECFDF5;color:#059669;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:700;">⭐ ${escapeHtml(dt.diemSo || 'Đã nhận xét')}</span>`
-                    : `<span style="color:var(--text-sub);font-size:12px;">Chưa chấm</span>`;
+                const isTicked = dt.daTich === true;
+                const tickBtn = `
+                    <button type="button" class="btn-tick-toggle ${isTicked ? 'is-ticked' : ''}"
+                        onclick="toggleDauTichNhanh('${dt.id}', ${!isTicked})"
+                        title="Bấm để cấp hoặc hủy 1 dấu tích">
+                        ${isTicked ? '✅ Đã cấp 1 dấu tích' : '+1 ✅ Cấp dấu tích'}
+                    </button>`;
+
+                const scoreBadge = dt.diemSo || dt.nhanXetGV
+                    ? `<span style="background:#FEF3C7;color:#92400E;padding:4px 9px;border-radius:999px;font-size:12px;font-weight:700;margin-left:4px;">⭐ ${escapeHtml(dt.diemSo || 'Đã nhận xét')}</span>`
+                    : '';
 
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td>${renderSubjectBadge(dt.monHoc || 'tienganh')}</td>
                     <td><strong>${escapeHtml(dt.tenDe || 'Không tên')}</strong></td>
                     <td>${dt.thoiGianNop ? new Date(dt.thoiGianNop).toLocaleString('vi-VN') : ''}</td>
-                    <td>${badgeKhen}</td>
-                    <td><button class="btn-view-submission" onclick="moBaiLam('${dt.id}')">👁 Xem bài & Chấm</button></td>
+                    <td>${tickBtn}${scoreBadge}</td>
+                    <td style="display:flex;gap:6px;flex-wrap:wrap;">
+                        <button class="btn-view-submission" onclick="moBaiLam('${dt.id}')">👁 Xem & Chấm</button>
+                        <button class="btn-delete" onclick="xoaBaiNop('${dt.id}')">Xóa</button>
+                    </td>
                 `;
                 t.appendChild(tr);
             });
@@ -1523,6 +1712,7 @@
                 document.getElementById('modalSubmissionTitle').textContent = `Bài làm: ${modalState.tenDe}`;
                 document.getElementById('modalSubmissionMeta').textContent =
                     `Ngày nộp: ${ketQua.thoiGianNop ? new Date(ketQua.thoiGianNop).toLocaleString('vi-VN') : '—'}`;
+                document.getElementById('inputDauTich').checked = ketQua.daTich === true;
                 document.getElementById('inputDiemSo').value = ketQua.diemSo || '';
                 document.getElementById('inputNhanXetGV').value = ketQua.nhanXetGV || '';
 
@@ -1537,14 +1727,18 @@
 
         window.luuNhanXetBaiLam = async () => {
             if (!modalState.submissionId) return;
+            const daTich = document.getElementById('inputDauTich').checked;
             const diemSo = document.getElementById('inputDiemSo').value.trim();
             const nhanXetGV = document.getElementById('inputNhanXetGV').value.trim();
             try {
                 await updateDoc(doc(db, "ketqua_hocsinh", modalState.submissionId), {
+                    daTich,
                     diemSo,
                     nhanXetGV
                 });
-                alert("🌟 Đã lưu điểm và lời khen! Em sẽ thấy ngay trên tab Bảng Vàng.");
+                alert(daTich
+                    ? "✅ Đã lưu đánh giá và cấp 1 dấu tích lên Bảng Vàng!"
+                    : "💾 Đã lưu đánh giá lên Bảng Vàng!");
             } catch (e) {
                 console.error(e);
                 alert("Lỗi khi lưu nhận xét.");
@@ -1603,7 +1797,7 @@
             if (modalState.loaiDe === 'dientu') {
                 htmlQ += `
                     <div class="submission-answer-box">
-                        <strong>✍️ Câu trả lời của em:</strong>
+                        <strong>✍️ Câu trả lời của học sinh:</strong>
                         <div class="submission-answer-text">${escapeHtml(answer)}</div>
                     </div>`;
             } else if (q.options && q.options.length) {
@@ -1613,13 +1807,13 @@
                         <div class="submission-option ${selected ? 'selected' : ''}">
                             <span class="submission-option-letter">${escapeHtml(opt.letter)}</span>
                             <span>${escapeHtml(opt.text)}</span>
-                            ${selected ? '<span class="selected-tag">✓ EM CHỌN</span>' : ''}
+                            ${selected ? '<span class="selected-tag">✓ ĐÃ CHỌN</span>' : ''}
                         </div>`;
                 });
             } else {
                 htmlQ += `
                     <div class="submission-answer-box">
-                        <strong>📝 Em đã chọn:</strong>
+                        <strong>📝 Đáp án đã chọn:</strong>
                         <div class="submission-answer-text">${escapeHtml(answer)}</div>
                     </div>`;
             }
@@ -1653,6 +1847,9 @@
             }
         });
 
+        // =========================================================================
+        // 5. KHO THẺ GHI NHỚ
+        // =========================================================================
         window.themTuNhanh = async () => {
             const monHoc = document.getElementById('monTuVung').value;
             const tenBo = document.getElementById('tenBoTu').value.trim();
